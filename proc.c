@@ -535,28 +535,28 @@ procdump(void)
 int
 cps(void)
 {
-	struct proc* p = ptable.proc;
-	while(p<&ptable.proc[NPROC])
+	struct proc* c = ptable.proc;
+	while(c<&ptable.proc[NPROC])
 	{
-		switch(p->state)
+		switch(c->state)
 		{
 			case UNUSED:
 				//cprintf("(%d %s %s)\n",p->pid,p->name,"UNUSED");
 				break;
 			case EMBRYO:
-				cprintf("(%d, %s, %s)\n",p->pid,p->name,"EMBRYO");
+				cprintf("(%d, %s, %s)\n",c->pid,c->name,"EMBRYO");
 				break;
 			case SLEEPING:
-				cprintf("(%d, %s, %s)\n",p->pid,p->name,"SLEEPING");
+				cprintf("(%d, %s, %s)\n",c->pid,c->name,"SLEEPING");
 				break;
 			case RUNNABLE:
-				cprintf("(%d, %s, %s)\n",p->pid,p->name,"RUNNABLE");
+				cprintf("(%d, %s, %s)\n",c->pid,c->name,"RUNNABLE");
 				break;
 			case RUNNING:
-				cprintf("(%d, %s, %s)\n",p->pid,p->name,"RUNNING");
+				cprintf("(%d, %s, %s)\n",c->pid,c->name,"RUNNING");
 				break;
 			case ZOMBIE:
-				cprintf("(%d, %s, %s)\n",p->pid,p->name,"ZOMBIE");
+				cprintf("(%d, %s, %s)\n",c->pid,c->name,"ZOMBIE");
 				break;	
 		}
 		p++;
