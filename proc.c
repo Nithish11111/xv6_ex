@@ -532,3 +532,37 @@ procdump(void)
     cprintf("\n");
   }
 }
+int
+cps(void)
+{
+	struct proc* p = ptable.proc;
+	while(p<&ptable.proc[NPROC])
+	{
+		switch(p->state)
+		{
+			case UNUSED:
+				//cprintf("(%d %s %s)\n",p->pid,p->name,"UNUSED");
+				break;
+			case EMBRYO:
+				cprintf("(%d, %s, %s)\n",p->pid,p->name,"EMBRYO");
+				break;
+			case SLEEPING:
+				cprintf("(%d, %s, %s)\n",p->pid,p->name,"SLEEPING");
+				break;
+			case RUNNABLE:
+				cprintf("(%d, %s, %s)\n",p->pid,p->name,"RUNNABLE");
+				break;
+			case RUNNING:
+				cprintf("(%d, %s, %s)\n",p->pid,p->name,"RUNNING");
+				break;
+			case ZOMBIE:
+				cprintf("(%d, %s, %s)\n",p->pid,p->name,"ZOMBIE");
+				break;	
+		}
+		p++;
+	}
+	return 22;
+}
+	
+	
+
