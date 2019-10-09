@@ -88,7 +88,7 @@ allocproc(void)
 found:
   p->state = EMBRYO;
   p->pid = nextpid++;
-
+  p->priority = 10;
   release(&ptable.lock);
 
   // Allocate kernel stack.
@@ -541,25 +541,25 @@ cps(void)
 		switch(c->state)
 		{
 			case UNUSED:
-				//cprintf("(%d %s %s)\n",p->pid,p->name,"UNUSED");
+				//cprintf("(%d %s %s)\n",c->pid,c->name,"UNUSED");
 				break;
 			case EMBRYO:
-				cprintf("(%d, %s, %s)\n",c->pid,c->name,"EMBRYO");
+				cprintf("(%d, %s, %s ,%d)\n",c->pid,c->name,"EMBRYO",c->priority);
 				break;
 			case SLEEPING:
-				cprintf("(%d, %s, %s)\n",c->pid,c->name,"SLEEPING");
+				cprintf("(%d, %s, %s,%d)\n",c->pid,c->name,"SLEEPING",c->priority);
 				break;
 			case RUNNABLE:
-				cprintf("(%d, %s, %s)\n",c->pid,c->name,"RUNNABLE");
+				cprintf("(%d, %s, %s,%d)\n",c->pid,c->name,"RUNNABLE",c->priority);
 				break;
 			case RUNNING:
-				cprintf("(%d, %s, %s)\n",c->pid,c->name,"RUNNING");
+				cprintf("(%d, %s, %s,%d)\n",c->pid,c->name,"RUNNING",c->priority);
 				break;
 			case ZOMBIE:
-				cprintf("(%d, %s, %s)\n",c->pid,c->name,"ZOMBIE");
+				cprintf("(%d, %s, %s,%d)\n",c->pid,c->name,"ZOMBIE",c->priority);
 				break;	
 		}
-		p++;
+		c++;
 	}
 	return 22;
 }
